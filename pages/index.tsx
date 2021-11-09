@@ -1,10 +1,22 @@
-import Head from 'next/head'
-import Image from 'next/image'
-// import styles from '../styles/Home.module.css'
-import clsx from 'clsx';
+import {useState} from 'react';
 
 export default function Home() {
+  const [text, setText] = useState('');
+  const [showText, setShowText] = useState(false);
+  
+  function handleChange(e) {
+    setText(e.target.value);
+  }
+  function handleSetText() {
+    setShowText( prev => !prev );
+  }
+  function handleClear() {
+    setText('');
+  }
   return (
-    <h1 className="h1" role="heading">Hello world</h1>
+    <div className="bg-light-theme-very-light-gray h-24"> 
+     ilham
+    </div>
   );
 }
+
