@@ -32,4 +32,11 @@
     font-size: 18px;
   }
 }
+:root {
+  --bright-blue: #3a7bfd;
+  --check-from: #57ddff;
+  --check-to: #c058f3;
+}
+
+
 

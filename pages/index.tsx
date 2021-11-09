@@ -24,7 +24,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex bg-dark-theme-very-dark-desaturated-blue w-full rounded-md py-4 focus:outline-none text-dark-theme-light-grayish-blue">
+        <div className="flex py-5 bg-dark-theme-very-dark-desaturated-blue w-full rounded-md focus:outline-none text-dark-theme-light-grayish-blue">
           <div className="px-4">
             <ButtonCheck />
           </div>
