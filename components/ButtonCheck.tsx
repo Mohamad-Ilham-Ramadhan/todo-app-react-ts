@@ -10,7 +10,7 @@ export default function ButtonCheck() {
     setChecked( prev => !prev );
   }
   return (
-    <div className={clsx("rounded-full p-2 flex justify-center items-center bg-gradient-to-br hover:from-check-from hover:to-check-to", border)}>
+    <div className={clsx("rounded-full p-px flex justify-center items-center bg-gradient-to-br hover:from-check-from hover:to-check-to", border)}>
       <button 
         className={clsx('rounded-full w-6 h-6 text-center flex justify-center items-center focus:outline-none bg-dark-theme-very-dark-desaturated-blue', bg)}
         onClick={handleClick}

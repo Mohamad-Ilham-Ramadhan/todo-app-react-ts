@@ -24,11 +24,11 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex py-5 bg-dark-theme-very-dark-desaturated-blue w-full rounded-md focus:outline-none text-dark-theme-light-grayish-blue">
-          <div className="px-4">
+        <div className="flex py-5 pr-5 bg-dark-theme-very-dark-desaturated-blue w-full rounded-md focus:outline-none text-dark-theme-light-grayish-blue">
+          <div className="px-6">
             <ButtonCheck />
           </div>
-          <input type="text"  className="bg-transparent"/>
+          <input type="text"  className="bg-transparent focus:outline-none caret-primary-bright-blue w-full"/>
         </div>
       </div>
     </div>
