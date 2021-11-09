@@ -33,11 +33,23 @@ module.exports = {
         'desktop-light': "url('/images/bg-desktop-light.jpg')",
         'mobile-light': "url('/images/bg-mobile-light.jpg')",
         'mobile-light': "url('/images/bg-mobile-light.jpg')",
+      },
+      spacing: {
+        '136': '34rem'
+      },
+      padding: {
+        '13': '4.75rem',
+      },
+      fontSize: {
+        '4xl': ['2.5rem', '2.75rem'],
+      },
+      borderWidth: {
+        '1': '1px'
       }
     },
     fontFamily: {
       sans: ['Josefin Sans', 'sans-serif']
-    }
+    },
   },
   variants: {
     extend: {},
