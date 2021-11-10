@@ -16,7 +16,7 @@ export default function TodoList() {
           <button className="mx-2 font-bold dark:hover:text-dark-theme-light-grayish-blue-hover hover:text-light-theme-very-dark-grayish-blue">Active</button>
           <button className="mx-2 font-bold dark:hover:text-dark-theme-light-grayish-blue-hover hover:text-light-theme-very-dark-grayish-blue">Completed</button>
         </div>
-        <button className="w-full hover:text-dark-theme-light-grayish-blue-hover">Clear Completed</button>
+        <button className="w-full dark:hover:text-dark-theme-light-grayish-blue-hover hover:text-light-theme-very-dark-grayish-blue">Clear Completed</button>
       </li>
     </ul>
   );
