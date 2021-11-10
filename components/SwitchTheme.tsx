@@ -6,7 +6,17 @@ export default function SwitchTheme() {
   const [theme, setTheme] = useState<Theme>('dark');
 
   function handleClick() {
-    setTheme( prev => prev === 'dark' ? 'light' : 'dark');
+    setTheme( prev => { 
+      const newState = prev === 'dark' ? 'light' : 'dark';
+
+      if (newState === 'dark') {
+        document.body.classList.add(newState);
+      } else {
+        document.body.classList.remove('dark');
+      }
+
+      return newState;
+    });
   }
   return (
     <div role="button" onClick={handleClick} className="relative">
