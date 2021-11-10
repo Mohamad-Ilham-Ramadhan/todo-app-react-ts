@@ -30,7 +30,7 @@ export default function InputBar({style} : Props) {
       <div className="px-6">
         <ButtonCheck />
       </div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="w-full">
         <input
           type="text"
           className="bg-transparent focus:outline-none caret-primary-bright-blue w-full"
