@@ -10,14 +10,14 @@ export default function ButtonCheck() {
     setChecked( prev => !prev );
   }
   return (
-    <div className={clsx("rounded-full p-px flex justify-center items-center bg-gradient-to-br hover:from-check-from hover:to-check-to", border)} onClick={handleClick}>
+    <div className={clsx("rounded-full p-px flex justify-center items-center bg-gradient-to-br hover:from-check-from hover:to-check-to cursor-pointer", border)} onClick={handleClick} role="button">
       <input type="checkbox" 
         checked={checked} 
         readOnly
-        className={clsx('rounded-full w-6 h-6 text-center flex justify-center items-center focus:outline-none bg-dark-theme-very-dark-desaturated-blue appearance-none', bg)}
+        className={clsx('rounded-full w-6 h-6 text-center flex justify-center items-center focus:outline-none bg-dark-theme-very-dark-desaturated-blue appearance-none cursor-pointer', bg)}
       />  
       {checked && 
-          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9" style={{position: 'absolute'}}><path fill="none" stroke="#FFF" strokeWidth="2" d="M1 4.304L3.696 7l6-6"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9" className="absolute cursor-pointer"><path fill="none" stroke="#FFF" strokeWidth="2" d="M1 4.304L3.696 7l6-6"/></svg>
         }
     </div>
   );
