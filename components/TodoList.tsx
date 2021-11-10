@@ -9,7 +9,7 @@ export default function TodoList() {
   return (
     <ul className="dark:bg-dark-theme-very-dark-desaturated-blue bg-white rounded-md shadow-2xl">
       {todos.map( todo => (
-        <List>{todo.title}</List>
+        <List key={todo.id} id={todo.id}>{todo.title}</List>
       ))}
       <li className="flex py-4 pl-6 pr-3 dark:text-dark-theme-very-dark-grayish-blue text-light-theme-dark-grayish-blue text-sm">
         <div className="w-full">5 items left</div>
