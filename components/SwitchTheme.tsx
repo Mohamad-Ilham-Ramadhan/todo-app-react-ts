@@ -3,7 +3,7 @@ import {useState} from 'react';
 type Theme = 'dark' | 'light';
 
 export default function SwitchTheme() {
-  const [theme, setTheme] = useState<Theme>('dark');
+  const [theme, setTheme] = useState<Theme>('light');
 
   function handleClick() {
     setTheme( prev => { 
