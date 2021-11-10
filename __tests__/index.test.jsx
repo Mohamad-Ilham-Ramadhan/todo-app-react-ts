@@ -11,10 +11,13 @@ import Home from '../pages/index';
 describe('Todo List', () => {
   test('add a todo and see in list', async () => {
     render(<Provider store={store}><Home /></Provider>);
-    userEvent.type(screen.getByRole('textbox'), 'ilham ganteng');
+    const title = 'ilham ganteng';
+    userEvent.type(screen.getByRole('textbox'), title);
     userEvent.keyboard('{Enter}');
 
     expect(screen.getByRole('textbox')).toHaveValue('');
-    screen.getByText('ilham ganteng');
+    screen.getByText(title);
   });
+
+  test('remove a todo')
 });

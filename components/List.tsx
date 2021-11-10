@@ -1,23 +1,31 @@
 import ButtonCheck from './ButtonCheck';
 import { useAppDispatch } from '../redux/hooks';
-import { remove } from '../redux/reducers/todoListSlice';
+import { remove, toggleComplete } from '../redux/reducers/todoListSlice';
 
 type Props = {
   children: string;
   id: string;
+  completed: boolean;
 }
 
-export default function List({children, id} : Props) {
+type ToggleComplete = typeof toggleComplete;
+
+export default function List({children, id, completed} : Props) {
   const dispatch = useAppDispatch();
   function handleRemove(id) {
     dispatch(remove(id));
   }
+  function handleToggleComplete(id) {
+    dispatch(toggleComplete(id));
+  }
+
+  const lineThrough = completed ? 'line-through' : '';
   return (
     <li className="group flex py-5 pr-5 dark:text-dark-theme-light-grayish-blue text-light-theme-very-dark-grayish-blue border-b last:border-b-0 dark:border-dark-theme-darkest-grayish-blue border-light-theme-very-light-grayish-blue">
       <div className="px-6">
-        <ButtonCheck />
+        <ButtonCheck onClick={() => handleToggleComplete(id)} checked={completed}/>
       </div>
-      <div>{children}</div>
+      <div className={lineThrough}>{children}</div>
       <button className="flex justify-center items-center ml-auto focus:outline-none" onClick={() => handleRemove(id)}>
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" className="hidden group-hover:block">
           <path

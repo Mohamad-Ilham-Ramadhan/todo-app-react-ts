@@ -1,16 +1,18 @@
 import { useState } from 'react';
 import clsx from 'clsx';
 
-export default function ButtonCheck() {
-  const [checked, setChecked] = useState(false);
+type Props = {
+  onClick: () => void;
+  checked: boolean
+}
+
+export default function ButtonCheck({onClick, checked} : Props) {
   const border = checked ? 'from-check-from to-check-to' : 'dark:bg-dark-theme-darkest-grayish-blue bg-light-theme-very-light-grayish-blue';
   const bg = checked ? 'bg-gradient-to-br from-check-from to-check-to' : '';
 
-  function handleClick() {
-    setChecked( prev => !prev );
-  }
+  
   return (
-    <div className={clsx("rounded-full p-px flex justify-center items-center bg-gradient-to-br hover:from-check-from hover:to-check-to cursor-pointer", border)} onClick={handleClick} role="button">
+    <div className={clsx("rounded-full p-px flex justify-center items-center bg-gradient-to-br hover:from-check-from hover:to-check-to cursor-pointer", border)} onClick={onClick} role="button">
       <input type="checkbox" 
         checked={checked} 
         readOnly

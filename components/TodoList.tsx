@@ -5,11 +5,10 @@ import List from './List';
 
 export default function TodoList() {
   const todos = useAppSelector( state => state.todoList.todos );
-  
   return (
     <ul className="dark:bg-dark-theme-very-dark-desaturated-blue bg-white rounded-md shadow-2xl">
       {todos.map( todo => (
-        <List key={todo.id} id={todo.id}>{todo.title}</List>
+        <List key={todo.id} id={todo.id} completed={todo.completed}>{todo.title}</List>
       ))}
       <li className="flex py-4 pl-6 pr-3 dark:text-dark-theme-very-dark-grayish-blue text-light-theme-dark-grayish-blue text-sm">
         <div className="w-full">5 items left</div>
