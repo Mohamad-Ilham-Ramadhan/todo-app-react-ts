@@ -6,13 +6,13 @@ type Props = {
 
 export default function List({children} : Props) {
   return (
-    <li className="flex py-5 pr-5 dark:text-dark-theme-light-grayish-blue text-light-theme-very-dark-grayish-blue border-b last:border-b-0 dark:border-dark-theme-darkest-grayish-blue border-light-theme-very-light-grayish-blue">
+    <li className="group flex py-5 pr-5 dark:text-dark-theme-light-grayish-blue text-light-theme-very-dark-grayish-blue border-b last:border-b-0 dark:border-dark-theme-darkest-grayish-blue border-light-theme-very-light-grayish-blue">
       <div className="px-6">
         <ButtonCheck />
       </div>
       <div>{children}</div>
       <button className="flex justify-center items-center ml-auto focus:outline-none">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" className="hidden group-hover:block">
           <path
             fill="#494C6B"
             fillRule="evenodd"
