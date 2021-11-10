@@ -17,7 +17,7 @@ export default function Home() {
     setText('');
   }
   return (
-    <div className="dark:bg-desktop-dark bg-desktop-light bg-no-repeat dark:bg-dark-theme-very-dark-blue bg-white min-h-screen"> 
+    <div className="dark:bg-desktop-dark bg-desktop-light bg-no-repeat dark:bg-dark-theme-very-dark-blue bg-light-theme-very-light-gray min-h-screen"> 
       <div className="pt-13 w-136 mx-auto">
         <div className="flex text-white mb-10">
           <div className="mr-auto font-bold text-4xl" style={{ letterSpacing: '.75rem' }}>TODO</div>
