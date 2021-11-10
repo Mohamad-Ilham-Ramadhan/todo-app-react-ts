@@ -14,7 +14,6 @@ export default function InputBar({style} : Props) {
   const todos = useSelector((state: RootState) => state.todoList.todos);
   const dispatch = useDispatch();
   const [value, setValue] = useState('');
-  console.log(todos);
   function handleSubmit(e) {
     e.preventDefault();
     const todo: Todo = {
