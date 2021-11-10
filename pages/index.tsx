@@ -4,18 +4,7 @@ import TodoList from '../components/TodoList';
 import SwitchTheme from '../components/SwitchTheme';
 
 export default function Home() {
-  const [text, setText] = useState('');
-  const [showText, setShowText] = useState(false);
   
-  function handleChange(e) {
-    setText(e.target.value);
-  }
-  function handleSetText() {
-    setShowText( prev => !prev );
-  }
-  function handleClear() {
-    setText('');
-  }
   return (
     <div className="dark:bg-desktop-dark bg-desktop-light bg-no-repeat dark:bg-dark-theme-very-dark-blue bg-light-theme-very-light-gray min-h-screen"> 
       <div className="pt-13 w-136 mx-auto">
