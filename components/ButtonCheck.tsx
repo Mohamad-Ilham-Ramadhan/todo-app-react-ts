@@ -13,6 +13,7 @@ export default function ButtonCheck() {
     <div className={clsx("rounded-full p-px flex justify-center items-center bg-gradient-to-br hover:from-check-from hover:to-check-to", border)} onClick={handleClick}>
       <input type="checkbox" 
         checked={checked} 
+        readOnly
         className={clsx('rounded-full w-6 h-6 text-center flex justify-center items-center focus:outline-none bg-dark-theme-very-dark-desaturated-blue appearance-none', bg)}
       />  
       {checked && 
