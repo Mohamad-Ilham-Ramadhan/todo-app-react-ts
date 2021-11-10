@@ -1,14 +1,16 @@
 import ButtonCheck from './ButtonCheck';
+import { useAppSelector } from '../redux/hooks';
 
 import List from './List';
 
 export default function TodoList() {
-
+  const todos = useAppSelector( state => state.todoList.todos );
+  
   return (
     <ul className="dark:bg-dark-theme-very-dark-desaturated-blue bg-white rounded-md shadow">
-      <List>Learn react typescript and TDD</List>
-      <List>Lets go</List>
-      <List>Workout boy!</List>
+      {todos.map( todo => (
+        <List>{todo.title}</List>
+      ))}
       <li className="flex py-4 pl-6 pr-3 dark:text-dark-theme-very-dark-grayish-blue text-light-theme-dark-grayish-blue text-sm">
         <div className="w-full">5 items left</div>
         <div className="w-full flex">
