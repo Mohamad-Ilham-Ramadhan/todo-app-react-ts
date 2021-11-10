@@ -19,7 +19,7 @@ export default function List({children, id, completed} : Props) {
     dispatch(toggleComplete(id));
   }
 
-  const lineThrough = completed ? 'line-through text-light-theme-light-grayish-blue' : '';
+  const lineThrough = completed ? 'line-through text-light-theme-light-grayish-blue dark:text-dark-theme-very-dark-grayish-blue' : '';
   return (
     <li className="group flex py-5 pr-5 dark:text-dark-theme-light-grayish-blue text-light-theme-very-dark-grayish-blue border-b last:border-b-0 dark:border-dark-theme-darkest-grayish-blue border-light-theme-very-light-grayish-blue">
       <div className="px-6">
