@@ -6,7 +6,7 @@ type Props = {
 
 export default function List({children} : Props) {
   return (
-    <li className="flex py-5 pr-5 text-dark-theme-light-grayish-blue border-b last:border-b-0 border-dark-theme-darkest-grayish-blue">
+    <li className="flex py-5 pr-5 dark:text-dark-theme-light-grayish-blue text-light-theme-very-dark-grayish-blue border-b last:border-b-0 dark:border-dark-theme-darkest-grayish-blue border-light-theme-very-light-grayish-blue">
       <div className="px-6">
         <ButtonCheck />
       </div>
