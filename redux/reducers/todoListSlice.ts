@@ -12,14 +12,17 @@ export interface InputBar {
   checked: boolean;
 }
 
+export type Filter = 'all' | 'active' | 'completed';
 export interface TodoList {
   todos: Todo[];
-  inputBar: InputBar
+  filter: Filter;
+  inputBar: InputBar;
 }
 
 const initialState: TodoList = {
   todos: [],
-  inputBar: { text: '', checked: false}
+  inputBar: { text: '', checked: false},
+  filter: 'all'
 };
 
 export const todoListSlice = createSlice({
@@ -50,8 +53,11 @@ export const todoListSlice = createSlice({
     },
     clearCompleted: (state) => {
       state.todos = state.todos.filter( todo => !todo.completed );
+    },
+    setFilter: (state, action: PayloadAction<Filter>) => {
+      state.filter = action.payload;
     }
   }
 });
-export const { remove, add, toggleComplete, input, toggleCheckInput, clearCompleted } = todoListSlice.actions;
+export const { remove, add, toggleComplete, input, toggleCheckInput, clearCompleted, setFilter } = todoListSlice.actions;
 export default todoListSlice.reducer;
