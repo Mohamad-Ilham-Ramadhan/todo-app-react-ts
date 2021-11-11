@@ -47,8 +47,11 @@ export const todoListSlice = createSlice({
     },
     toggleComplete: (state, action: PayloadAction<Todo['id']>) => {
       state.todos = state.todos.map( todo => todo.id === action.payload ? {...todo, completed: !todo.completed} : todo );
+    },
+    clearCompleted: (state) => {
+      state.todos = state.todos.filter( todo => !todo.completed );
     }
   }
 });
-export const { remove, add, toggleComplete, input, toggleCheckInput } = todoListSlice.actions;
+export const { remove, add, toggleComplete, input, toggleCheckInput, clearCompleted } = todoListSlice.actions;
 export default todoListSlice.reducer;
