@@ -8,7 +8,7 @@ export default function TodoList() {
   const dispatch = useAppDispatch();
   const filter = useAppSelector( state => state.filter );
   const todos = useAppSelector( state => state.todos );
-  const labelRemaining = todos.length > 0 ? `${todos.length} items left` : 'nothing todo zzz';
+  const labelRemaining = todos.length > 0 ? `${todos.filter( todo => !todo.completed).length} items left` : 'nothing todo zzz';
   let filteredTodos : Todo[];
 
   if ( filter === 'all') {
