@@ -1,8 +1,9 @@
-import ButtonCheck from './ButtonCheck';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { clearCompleted, setFilter, Filter, Todo } from '../redux/reducers/todoListSlice';
-import List from './List';
 import clsx from 'clsx';
+// Components
+import List from './List';
+import ButtonFilter from './ButtonFilter';
 
 export default function TodoList() {
   const dispatch = useAppDispatch();
@@ -37,18 +38,9 @@ export default function TodoList() {
       <li className="flex py-4 pl-6 pr-3 dark:text-dark-theme-very-dark-grayish-blue text-light-theme-dark-grayish-blue text-sm">
         <div className="w-full font-bold">{labelRemaining}</div>
         <div className="w-full flex">
-          <button 
-            className={clsx(btnFilterClassName, activeFilterAll)}
-            onClick={() => handleFilter('all')}
-          >All</button>
-          <button 
-            className={clsx(btnFilterClassName, activeFilterActive)}
-            onClick={() => handleFilter('active')}
-          >Active</button>
-          <button 
-            className={clsx(btnFilterClassName, activeFilterCompleted)}
-            onClick={() => handleFilter('completed')}
-          >Completed</button>
+          <ButtonFilter active={filter === 'all' ? true : false} onClick={() => handleFilter('all')}>All</ButtonFilter>
+          <ButtonFilter active={filter === 'active' ? true : false} onClick={() => handleFilter('active')}>Active</ButtonFilter>
+          <ButtonFilter active={filter === 'completed' ? true : false} onClick={() => handleFilter('completed')}>Completed</ButtonFilter>
         </div>
         <button 
           className="w-full dark:hover:text-dark-theme-light-grayish-blue-hover hover:text-light-theme-very-dark-grayish-blue focus:outline-none"
