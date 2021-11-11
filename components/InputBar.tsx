@@ -31,6 +31,7 @@ export default function InputBar({style} : Props) {
           className="bg-transparent focus:outline-none caret-primary-bright-blue w-full"
           value={text}
           onChange={(e) => dispatch(input(e.target.value))}
+          placeholder="Create a new todo..."
         />
     </form>
   );

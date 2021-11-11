@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import {Filter} from '../redux/reducers/todoListSlice';
 
 type Props = {
   children: string;
