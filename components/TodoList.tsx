@@ -8,13 +8,14 @@ export default function TodoList() {
   const dispatch = useAppDispatch();
   const filter = useAppSelector( state => state.filter );
   const todos = useAppSelector( state => state.todos );
-  const labelRemaining = todos.length > 0 ? `${todos.filter( todo => !todo.completed).length} items left` : 'nothing todo zzz';
+  const activeTodos = todos.filter( todo => !todo.completed);
+  const labelRemaining = activeTodos.length > 0 ? `${activeTodos.length} items left` : 'nothing todo zzz';
   let filteredTodos : Todo[];
 
   if ( filter === 'all') {
     filteredTodos = todos;
   } else if ( filter === 'active' ) {
-    filteredTodos = todos.filter( todo => !todo.completed );
+    filteredTodos = activeTodos;
   } else if ( filter === 'completed' ) {
     filteredTodos = todos.filter( todo => todo.completed );
   }
