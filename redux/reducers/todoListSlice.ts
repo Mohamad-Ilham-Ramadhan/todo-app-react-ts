@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface Todo {
   id: string;
@@ -31,8 +32,15 @@ export const todoListSlice = createSlice({
     toggleCheckInput: (state) => {
       state.inputBar.checked = !state.inputBar.checked;
     },
-    add: (state, action: PayloadAction<Todo>) => {
-      state.todos.push(action.payload);
+    add: (state) => {
+      const todo: Todo = {
+        id: uuidv4(),
+        title: state.inputBar.text,
+        completed: state.inputBar.checked
+      }
+      state.todos.push(todo);
+      state.inputBar.text = '';
+      state.inputBar.checked = false;
     },
     remove: (state, action: PayloadAction<Todo['id']>) => {
       state.todos = state.todos.filter( todo => todo.id !== action.payload );
