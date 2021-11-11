@@ -6,18 +6,31 @@ export interface Todo {
   completed: boolean;
 }
 
+export interface InputBar {
+  text: string;
+  checked: boolean;
+}
+
 export interface TodoList {
-  todos: Todo[]
+  todos: Todo[];
+  inputBar: InputBar
 }
 
 const initialState: TodoList = {
-  todos: []
+  todos: [],
+  inputBar: { text: '', checked: false}
 };
 
 export const todoListSlice = createSlice({
   name: 'todoList',
   initialState,
   reducers: {
+    input: (state, action: PayloadAction<string>) => {
+      state.inputBar.text = action.payload;
+    },
+    toggleCheckInput: (state) => {
+      state.inputBar.checked = !state.inputBar.checked;
+    },
     add: (state, action: PayloadAction<Todo>) => {
       state.todos.push(action.payload);
     },
@@ -29,5 +42,5 @@ export const todoListSlice = createSlice({
     }
   }
 });
-export const { remove, add, toggleComplete } = todoListSlice.actions;
+export const { remove, add, toggleComplete, input, toggleCheckInput } = todoListSlice.actions;
 export default todoListSlice.reducer;

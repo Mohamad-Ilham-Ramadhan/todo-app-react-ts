@@ -4,7 +4,7 @@ import { useAppSelector } from '../redux/hooks';
 import List from './List';
 
 export default function TodoList() {
-  const todos = useAppSelector( state => state.todoList.todos );
+  const todos = useAppSelector( state => state.todos );
   return (
     <ul className="dark:bg-dark-theme-very-dark-desaturated-blue bg-white rounded-md shadow-2xl">
       {todos.map( todo => (
