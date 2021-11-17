@@ -35,7 +35,7 @@ export default function TodoList() {
       {filteredTodos.map( todo => (
         <List key={todo.id} id={todo.id} completed={todo.completed}>{todo.title}</List>
       ))}
-      <li className="flex py-4 pl-6 pr-3 dark:text-dark-theme-very-dark-grayish-blue text-light-theme-dark-grayish-blue text-sm">
+      <li className="flex py-4 pl-6 pr-3 dark:text-dark-theme-very-dark-grayish-blue text-light-theme-dark-grayish-blue text-xs sm:text-sm">
         <div className="w-full font-bold">{labelRemaining}</div>
         <div className="w-full flex">
           <ButtonFilter active={filter === 'all' ? true : false} onClick={() => handleFilter('all')}>All</ButtonFilter>
