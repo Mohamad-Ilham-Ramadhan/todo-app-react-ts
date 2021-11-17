@@ -38,5 +38,17 @@
   --check-to: #c058f3;
 }
 
+@layer utilities {
+  @variants resonsive {
+    .switch-theme-size {
+      width: 26px;
+      height: 26px;
+    }
+    .switch-theme-size-mobile {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
 
 

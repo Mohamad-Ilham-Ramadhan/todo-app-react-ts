@@ -12,7 +12,7 @@ export default function Home() {
     <div className="dark:bg-desktop-dark bg-desktop-light bg-no-repeat dark:bg-dark-theme-very-dark-blue bg-light-theme-very-light-gray min-h-screen"> 
       <div className="pt-13 sm:w-136 w-80 mx-auto">
         <div className="flex text-white mb-10">
-          <div className="mr-auto font-bold text-4xl" style={{ letterSpacing: '.75rem' }}>TODO</div>
+          <div className="mr-auto font-bold text-2xl sm:text-4xl" style={{ letterSpacing: '.75rem' }}>TODO</div>
           <div className="flex items-center">
             <SwitchTheme></SwitchTheme>
           </div>
