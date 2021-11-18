@@ -26,7 +26,7 @@ export default function List({children, id, completed} : Props) {
         <ButtonCheck onClick={() => handleToggleComplete(id)} checked={completed}/>
       </div>
       <div className={lineThrough}>{children}</div>
-      <button className="flex sm:hidden sm:group-hover:flex justify-end items-center ml-auto focus:outline-none" onClick={() => handleRemove(id)}>
+      <button className="flex sm:hidden sm:group-hover:flex justify-end items-center ml-auto focus:outline-none" onClick={() => handleRemove(id)} role="deletion">
         <img src="/images/icon-cross.svg" alt="delete" className="w-4/6 sm:w-full"/>
       </button>
     </li>

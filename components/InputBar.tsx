@@ -24,7 +24,7 @@ export default function InputBar({className} : Props) {
       onSubmit={handleSubmit}
     >
       <div className="mr-3 sm:mr-5">
-        <ButtonCheck onClick={() => { dispatch(toggleCheckInput())}} checked={checked} />
+        <ButtonCheck onClick={() => { dispatch(toggleCheckInput())}} checked={checked} dataTestid="btn-check-input-bar"/>
       </div>
         <input
           type="text"

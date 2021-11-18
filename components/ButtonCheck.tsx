@@ -3,16 +3,17 @@ import clsx from 'clsx';
 
 type Props = {
   onClick: () => void;
-  checked: boolean
+  checked: boolean;
+  dataTestid?: string;
 }
 
-export default function ButtonCheck({onClick, checked} : Props) {
+export default function ButtonCheck({onClick, checked, dataTestid} : Props) {
   const border = checked ? 'from-check-from to-check-to' : 'dark:bg-dark-theme-darkest-grayish-blue bg-light-theme-very-light-grayish-blue';
   const bg = checked ? 'bg-gradient-to-br from-check-from to-check-to' : '';
 
   
   return (
-    <div className={clsx("rounded-full p-px flex justify-center items-center bg-gradient-to-br hover:from-check-from hover:to-check-to cursor-pointer relative", border)} onClick={onClick} role="button">
+    <div className={clsx("rounded-full p-px flex justify-center items-center bg-gradient-to-br hover:from-check-from hover:to-check-to cursor-pointer relative", border)} onClick={onClick} role="button" data-testid={dataTestid}>
       <input type="checkbox" 
         checked={checked} 
         readOnly
