@@ -4,10 +4,10 @@ import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import {  add, input, toggleCheckInput } from '../redux/reducers/todoListSlice';
 
 type Props = {
-  style?: string;
+  className?: string;
 }
 
-export default function InputBar({style} : Props) {
+export default function InputBar({className} : Props) {
   const text = useAppSelector((state) => state.inputBar.text);
   const checked = useAppSelector((state) => state.inputBar.checked);
   const dispatch = useAppDispatch();
@@ -20,7 +20,7 @@ export default function InputBar({style} : Props) {
   return (
     <form 
       role="my-form"
-      className={clsx("flex py-3.5 pr-3.5 sm:py-5 sm:pr-5 w-full rounded-md dark:bg-dark-theme-very-dark-desaturated-blue bg-white focus:outline-none dark:text-dark-theme-light-grayish-blue text-light-theme-very-dark-grayish-blue drop-shadow-2xl", style)}
+      className={clsx("flex py-3.5 pr-3.5 sm:py-5 sm:pr-5 w-full rounded-md dark:bg-dark-theme-very-dark-desaturated-blue bg-white focus:outline-none dark:text-dark-theme-light-grayish-blue text-light-theme-very-dark-grayish-blue drop-shadow-2xl", className)}
       onSubmit={handleSubmit}
     >
       <div className="pl-4 pr-3 sm:px-6">

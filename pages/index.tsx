@@ -17,8 +17,8 @@ export default function Home() {
             <SwitchTheme></SwitchTheme>
           </div>
         </div>
-        <InputBar style="mb-4 sm:mb-6" />
-        <TodoList />
+        <InputBar className="mb-4 sm:mb-6" />
+        <TodoList className="relative" />
       </div>
     </div>
     </Provider>

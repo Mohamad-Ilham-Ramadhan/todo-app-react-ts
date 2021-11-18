@@ -5,7 +5,12 @@ import clsx from 'clsx';
 import List from './List';
 import ButtonFilter from './ButtonFilter';
 
-export default function TodoList() {
+type Props = {
+  children?: string;
+  className?: string;
+}
+
+export default function TodoList({className} : Props) {
   const dispatch = useAppDispatch();
   const filter = useAppSelector( state => state.filter );
   const todos = useAppSelector( state => state.todos );
@@ -31,7 +36,7 @@ export default function TodoList() {
   const activeFilterActive = filter === 'active' ? activeClassName : '';
   const activeFilterCompleted = filter === 'completed' ? activeClassName : '';
   return (
-    <ul className="dark:bg-dark-theme-very-dark-desaturated-blue bg-white rounded-md shadow-2xl">
+    <ul className={clsx("dark:bg-dark-theme-very-dark-desaturated-blue bg-white rounded-md shadow-2xl", className)}>
       {filteredTodos.map( todo => (
         <List key={todo.id} id={todo.id} completed={todo.completed}>{todo.title}</List>
       ))}
