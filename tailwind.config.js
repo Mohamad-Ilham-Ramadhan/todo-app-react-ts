@@ -36,12 +36,15 @@ module.exports = {
         'mobile-light': "url('/images/bg-mobile-light.jpg')",
       },
       spacing: {
+        '4.5': '1.125rem',
         '136': '34rem'
       },
       padding: {
         '13': '4.75rem',
       },
       fontSize: {
+        'xs': '.65rem',
+        '2.5xl': ['1.65rem', '1.8rem'],
         '4xl': ['2.5rem', '2.75rem'],
       },
       borderWidth: {
@@ -51,6 +54,10 @@ module.exports = {
     fontFamily: {
       sans: ['Josefin Sans', 'sans-serif']
     },
+    letterSpacing: {
+      'title-mobile': '.55rem',
+      'title-desktop': '.75rem',
+    }
   },
   variants: {
     extend: {},

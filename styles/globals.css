@@ -28,7 +28,7 @@
          url('/fonts/josefin-sans-v20-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
          url('/fonts/josefin-sans-v20-latin-700.svg#JosefinSans') format('svg'); /* Legacy iOS */
   }
-  body {
+  :root {
     font-size: 18px;
   }
 }

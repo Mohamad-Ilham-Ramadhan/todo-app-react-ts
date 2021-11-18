@@ -12,15 +12,15 @@ export default function ButtonCheck({onClick, checked} : Props) {
 
   
   return (
-    <div className={clsx("rounded-full p-px flex justify-center items-center bg-gradient-to-br hover:from-check-from hover:to-check-to cursor-pointer", border)} onClick={onClick} role="button">
+    <div className={clsx("rounded-full p-px flex justify-center items-center bg-gradient-to-br hover:from-check-from hover:to-check-to cursor-pointer relative", border)} onClick={onClick} role="button">
       <input type="checkbox" 
         checked={checked} 
         readOnly
-        className={clsx('rounded-full w-6 h-6 text-center flex justify-center items-center focus:outline-none dark:bg-dark-theme-very-dark-desaturated-blue bg-white appearance-none cursor-pointer', bg)}
+        className={clsx('rounded-full w-4.5 h-4.5 sm:w-6 sm:h-6 text-center flex justify-center items-center focus:outline-none dark:bg-dark-theme-very-dark-desaturated-blue bg-white appearance-none cursor-pointer', bg)}
       />  
       {checked && 
-          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9" className="absolute cursor-pointer"><path fill="none" stroke="#FFF" strokeWidth="2" d="M1 4.304L3.696 7l6-6"/></svg>
-        }
+        <img src="/images/icon-check.svg" alt="check icon" className="w-2/4 sm:w-2/4 absolute"/>
+      }
     </div>
   );
 }
