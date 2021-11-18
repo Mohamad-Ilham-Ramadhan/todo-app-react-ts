@@ -37,7 +37,7 @@ module.exports = {
       },
       spacing: {
         '4.5': '1.125rem',
-        '136': '34rem'
+        '124': '31rem'
       },
       padding: {
         '13': '4.75rem',
@@ -46,6 +46,7 @@ module.exports = {
         'xs': '.65rem',
         'sm': '.8rem',
         '2.5xl': ['1.65rem', '1.8rem'],
+        '3.5xl': ['2.25rem', '2.5rem'],
         '4xl': ['2.5rem', '2.75rem'],
       },
       borderWidth: {

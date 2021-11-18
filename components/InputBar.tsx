@@ -20,10 +20,10 @@ export default function InputBar({className} : Props) {
   return (
     <form 
       role="my-form"
-      className={clsx("flex py-3.5 px-5 sm:py-5 sm:px-6 w-full rounded-md dark:bg-dark-theme-very-dark-desaturated-blue bg-white focus:outline-none dark:text-dark-theme-light-grayish-blue text-light-theme-very-dark-grayish-blue drop-shadow-2xl", className)}
+      className={clsx("flex py-3.5 px-5 sm:py-4 sm:px-6 w-full rounded-md dark:bg-dark-theme-very-dark-desaturated-blue bg-white focus:outline-none dark:text-dark-theme-light-grayish-blue text-light-theme-very-dark-grayish-blue drop-shadow-2xl", className)}
       onSubmit={handleSubmit}
     >
-      <div className="mr-3">
+      <div className="mr-3 sm:mr-5">
         <ButtonCheck onClick={() => { dispatch(toggleCheckInput())}} checked={checked} />
       </div>
         <input

@@ -21,8 +21,8 @@ export default function List({children, id, completed} : Props) {
 
   const lineThrough = completed ? 'line-through text-light-theme-light-grayish-blue dark:text-dark-theme-very-dark-grayish-blue' : '';
   return (
-    <li className="group flex py-3.5 px-5 sm:py-5 sm:px-6 dark:text-dark-theme-light-grayish-blue text-light-theme-very-dark-grayish-blue border-b last:border-b-0 dark:border-dark-theme-darkest-grayish-blue border-light-theme-very-light-grayish-blue">
-      <div className="mr-3">
+    <li className="group flex py-3.5 px-5 sm:py-4 sm:px-6 dark:text-dark-theme-light-grayish-blue text-light-theme-very-dark-grayish-blue border-b last:border-b-0 dark:border-dark-theme-darkest-grayish-blue border-light-theme-very-light-grayish-blue">
+      <div className="mr-3 sm:mr-5">
         <ButtonCheck onClick={() => handleToggleComplete(id)} checked={completed}/>
       </div>
       <div className={lineThrough}>{children}</div>
