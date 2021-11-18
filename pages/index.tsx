@@ -21,7 +21,8 @@ export default function Home() {
         </div>
         <InputBar className="mb-4 sm:mb-6" />
         <TodoList className="relative mb-4" />
-        <FiltersBar className="relative sm:hidden" />
+        <FiltersBar className="relative sm:hidden"/>
+        <div className="text-center text-sm dark:text-dark-theme-very-dark-grayish-blue text-light-theme-dark-grayish-blue mt-9 sm:mt-11">Drag and drop to reorder list</div>
       </div>
     </div>
     </Provider>
