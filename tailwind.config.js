@@ -49,6 +49,9 @@ module.exports = {
       },
       borderWidth: {
         '1': '1px'
+      },
+      dropShadow: {
+        '2xl': '0 25px 50px -12px rgba(77, 80, 102, 0.25)',
       }
     },
     fontFamily: {

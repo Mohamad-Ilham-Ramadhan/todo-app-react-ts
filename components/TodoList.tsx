@@ -40,19 +40,21 @@ export default function TodoList({className} : Props) {
       {filteredTodos.map( todo => (
         <List key={todo.id} id={todo.id} completed={todo.completed}>{todo.title}</List>
       ))}
-      <li className="flex pl-4 py-3 pr-3 sm:py-4 sm:pl-6 dark:text-dark-theme-very-dark-grayish-blue text-light-theme-dark-grayish-blue text-xs sm:text-sm">
-        <div className="w-full font-bold">{labelRemaining}</div>
-        <div className="w-full flex">
+      <li className="flex py-3 px-5 sm:py-4 sm:px-6 dark:text-dark-theme-very-dark-grayish-blue text-light-theme-dark-grayish-blue text-xs sm:text-sm">
+        <div className="w-full">{labelRemaining}</div>
+        <div className="w-full hidden sm:flex">
           <ButtonFilter active={filter === 'all' ? true : false} onClick={() => handleFilter('all')}>All</ButtonFilter>
           <ButtonFilter active={filter === 'active' ? true : false} onClick={() => handleFilter('active')}>Active</ButtonFilter>
           <ButtonFilter active={filter === 'completed' ? true : false} onClick={() => handleFilter('completed')}>Completed</ButtonFilter>
         </div>
-        <button 
-          className="w-full dark:hover:text-dark-theme-light-grayish-blue-hover hover:text-light-theme-very-dark-grayish-blue focus:outline-none"
-          onClick={() => dispatch(clearCompleted())}
-        >
-          Clear Completed
-        </button>
+        <div className="w-full text-right">
+          <button 
+            className="dark:hover:text-dark-theme-light-grayish-blue-hover hover:text-light-theme-very-dark-grayish-blue focus:outline-none"
+            onClick={() => dispatch(clearCompleted())}
+          >
+            Clear Completed
+          </button>
+        </div>
       </li>
     </ul>
   );
