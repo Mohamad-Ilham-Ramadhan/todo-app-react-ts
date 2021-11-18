@@ -1,7 +1,9 @@
 import {useState} from 'react';
+// Components
 import InputBar from '../components/InputBar';
 import TodoList from '../components/TodoList';
 import SwitchTheme from '../components/SwitchTheme';
+import FiltersBar from '../components/FiltersBar';
 import { Provider } from 'react-redux';
 import { store } from '../redux/store';
 
@@ -18,7 +20,8 @@ export default function Home() {
           </div>
         </div>
         <InputBar className="mb-4 sm:mb-6" />
-        <TodoList className="relative" />
+        <TodoList className="relative mb-4" />
+        <FiltersBar className="relative sm:hidden" />
       </div>
     </div>
     </Provider>

@@ -44,23 +44,24 @@ module.exports = {
       },
       fontSize: {
         'xs': '.65rem',
+        'sm': '.8rem',
         '2.5xl': ['1.65rem', '1.8rem'],
         '4xl': ['2.5rem', '2.75rem'],
       },
       borderWidth: {
         '1': '1px'
       },
-      dropShadow: {
+      boxShadow: {
         '2xl': '0 25px 50px -12px rgba(77, 80, 102, 0.25)',
+      },
+      letterSpacing: {
+        'title-mobile': '.55rem',
+        'title-desktop': '.75rem',
       }
     },
     fontFamily: {
       sans: ['Josefin Sans', 'sans-serif']
     },
-    letterSpacing: {
-      'title-mobile': '.55rem',
-      'title-desktop': '.75rem',
-    }
   },
   variants: {
     extend: {},

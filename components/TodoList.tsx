@@ -30,24 +30,19 @@ export default function TodoList({className} : Props) {
     dispatch(setFilter(filter));
   }
 
-  const btnFilterClassName = 'mx-2 font-bold dark:hover:text-dark-theme-light-grayish-blue-hover hover:text-light-theme-very-dark-grayish-blue focus:outline-none';
-  const activeClassName = 'text-primary-bright-blue';
-  const activeFilterAll = filter === 'all' ? activeClassName : '';
-  const activeFilterActive = filter === 'active' ? activeClassName : '';
-  const activeFilterCompleted = filter === 'completed' ? activeClassName : '';
   return (
     <ul className={clsx("dark:bg-dark-theme-very-dark-desaturated-blue bg-white rounded-md shadow-2xl", className)}>
       {filteredTodos.map( todo => (
         <List key={todo.id} id={todo.id} completed={todo.completed}>{todo.title}</List>
       ))}
       <li className="flex py-3 px-5 sm:py-4 sm:px-6 dark:text-dark-theme-very-dark-grayish-blue text-light-theme-dark-grayish-blue text-xs sm:text-sm">
-        <div className="w-full">{labelRemaining}</div>
+        <div className="w-full h-6 flex items-center">{labelRemaining}</div>
         <div className="w-full hidden sm:flex">
           <ButtonFilter active={filter === 'all' ? true : false} onClick={() => handleFilter('all')}>All</ButtonFilter>
           <ButtonFilter active={filter === 'active' ? true : false} onClick={() => handleFilter('active')}>Active</ButtonFilter>
           <ButtonFilter active={filter === 'completed' ? true : false} onClick={() => handleFilter('completed')}>Completed</ButtonFilter>
         </div>
-        <div className="w-full text-right">
+        <div className="w-full h-6 flex items-center justify-end">
           <button 
             className="dark:hover:text-dark-theme-light-grayish-blue-hover hover:text-light-theme-very-dark-grayish-blue focus:outline-none"
             onClick={() => dispatch(clearCompleted())}
