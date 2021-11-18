@@ -9,8 +9,8 @@ export default function Home() {
   
   return (
     <Provider store={store}>
-    <div className="dark:bg-mobile-dark sm:dark:bg-desktop-dark bg-mobile-light sm:bg-desktop-light bg-no-repeat bg-contain dark:bg-dark-theme-very-dark-blue bg-light-theme-very-light-gray min-h-screen text-xs sm:text-base"> 
-      <div className="pt-10 sm:pt-13 sm:w-136 w-72 mx-auto">
+    <div className="px-5 dark:bg-mobile-dark sm:dark:bg-desktop-dark bg-mobile-light sm:bg-desktop-light bg-no-repeat bg-contain dark:bg-dark-theme-very-dark-blue bg-light-theme-very-light-gray min-h-screen text-xs sm:text-base"> 
+      <div className="pt-10 sm:pt-13 w-full sm:w-136 mx-auto">
         <div className="flex text-white sm:mb-10 mb-7">
           <div className="mr-auto font-bold text-2xl sm:text-4xl tracking-title-mobile sm:tracking-title-desktop">TODO</div>
           <div className="flex items-center">
