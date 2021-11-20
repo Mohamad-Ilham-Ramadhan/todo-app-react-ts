@@ -35,6 +35,9 @@ module.exports = {
         'mobile-dark': "url('/images/bg-mobile-dark.jpg')",
         'mobile-light': "url('/images/bg-mobile-light.jpg')",
       },
+      backgroundColor: {
+        'inherit': 'inherit',
+      },
       spacing: {
         '4.5': '1.125rem',
         '124': '31rem'

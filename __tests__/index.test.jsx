@@ -126,4 +126,12 @@ describe('Todo List', () => {
       userEvent.click(deletes[index]);
     }
   });
+
+  test('switch theme light/dark', async () => {
+    // light theme initial load
+    expect(document.body).not.toHaveClass('dark');
+    // switch to dark theme
+    userEvent.click(screen.getByTestId('btn-switch-theme'));
+    expect(document.body).toHaveClass('dark');
+  });
 });

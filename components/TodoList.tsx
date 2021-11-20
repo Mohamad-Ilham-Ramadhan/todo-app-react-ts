@@ -2,6 +2,7 @@ import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { clearCompleted, setFilter, Filter, Todo } from '../redux/reducers/todoListSlice';
 import clsx from 'clsx';
 // Components
+import Draggable from 'react-draggable';
 import List from './List';
 import ButtonFilter from './ButtonFilter';
 
@@ -31,11 +32,13 @@ export default function TodoList({className} : Props) {
   }
 
   return (
-    <ul className={clsx("dark:bg-dark-theme-very-dark-desaturated-blue bg-white rounded-md shadow-2xl", className)}>
-      {filteredTodos.map( todo => (
-        <List key={todo.id} id={todo.id} completed={todo.completed}>{todo.title}</List>
-      ))}
-      <li className="flex py-3 px-5 sm:py-4 sm:px-6 dark:text-dark-theme-very-dark-grayish-blue text-light-theme-dark-grayish-blue text-xs sm:text-sm">
+    <div className={clsx("dark:bg-dark-theme-very-dark-desaturated-blue bg-white rounded-md shadow-2xl", className)}>
+      <ul className="list-container">
+        {filteredTodos.map( (todo, index) => (
+          <List key={todo.id} id={todo.id} index={index} completed={todo.completed}>{todo.title}</List>
+        ))}
+      </ul>
+      <div className="flex py-3 px-5 sm:py-4 sm:px-6 dark:text-dark-theme-very-dark-grayish-blue text-light-theme-dark-grayish-blue text-xs sm:text-sm">
         <div className="w-full h-6 flex items-center">{labelRemaining}</div>
         <div className="w-full hidden sm:flex">
           <ButtonFilter active={filter === 'all' ? true : false} onClick={() => handleFilter('all')}>All</ButtonFilter>
@@ -50,7 +53,7 @@ export default function TodoList({className} : Props) {
             Clear Completed
           </button>
         </div>
-      </li>
-    </ul>
+      </div>
+    </div>
   );
 }
