@@ -35,7 +35,7 @@ export default function TodoList({className} : Props) {
     <div className={clsx("dark:bg-dark-theme-very-dark-desaturated-blue bg-white rounded-md shadow-2xl", className)}>
       <ul className="list-container">
         {filteredTodos.map( (todo, index) => (
-          <List key={todo.id} id={todo.id} index={index} completed={todo.completed}>{todo.title}</List>
+          <List key={todo.id}  index={index} {...todo}>{todo.title}</List>
         ))}
       </ul>
       <div className="flex py-3 px-5 sm:py-4 sm:px-6 dark:text-dark-theme-very-dark-grayish-blue text-light-theme-dark-grayish-blue text-xs sm:text-sm">

@@ -2,8 +2,10 @@ import {DOMElement, useRef, useState, useEffect } from 'react';
 import clsx from 'clsx';
 import ButtonCheck from './ButtonCheck';
 import { useAppDispatch } from '../redux/hooks';
-import { remove, toggleComplete, swapTodo } from '../redux/reducers/todoListSlice';
+import { remove, toggleComplete,  Todo } from '../redux/reducers/todoListSlice';
 import Draggable from 'react-draggable';
+import { current } from 'immer';
+import { getDisplayName } from 'next/dist/shared/lib/utils';
 
 type Props = {
   children: string;
@@ -15,12 +17,13 @@ type Props = {
 
 export default function List({children, id, completed, index} : Props) {
   const nodeRef = useRef(null);
-  const [x, setX] = useState(0);
   const [y, setY] = useState(0);
+  const [x, setX] = useState(0);
   const [height, setHeight] = useState(0);
+  const [dragDirection, setDragDirection] = useState(null);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
+  useEffect(() => {;
     setHeight(nodeRef.current.offsetHeight);
   }, [])
 
@@ -41,16 +44,14 @@ export default function List({children, id, completed, index} : Props) {
     // console.log('on start Y:', y);
   }
   function onDrag(e, data) {
-    // console.log(data.y);
-    if (data.y > height / 2) {
-      // jika y lebih besar dari height/2 maka swap dengan list yang bawah 
-      console.log('swap bawah');
-      dispatch(swapTodo({id, direction: 'bottom'}));
-    } else if ( data.y < -(height / 2)) {
-      dispatch(swapTodo({id, direction: 'top'}));
-      // jika y lebih kecil dari -(height/2) maka swap dengan list di atas
-      console.log('swap atas');
+    const halfHeight =  height / 2;
+    let direction;
+    if ( data.y >  data.lastY) {
+      direction = 'bottom';
+    } else if ( data.y < data.lastY) {
+      direction = 'top';
     }
+    console.log(halfHeight, data.y);
   }
   function onStop(e, data) {
     nodeRef.current.style.zIndex = '';
@@ -79,7 +80,7 @@ export default function List({children, id, completed, index} : Props) {
         ref={nodeRef}
         id={`list-${id}`}
       >
-        <div className="mr-3 sm:mr-5 no-handle">
+        <div className="mr-3 sm:mr-5 no-handle flex items-center">
           <ButtonCheck onClick={() => handleToggleComplete(id)} checked={completed}/>
         </div>
         <div className={clsx(lineThrough, 'w-full')}>{children}</div>

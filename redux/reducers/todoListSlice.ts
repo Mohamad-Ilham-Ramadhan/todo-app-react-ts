@@ -5,6 +5,8 @@ export interface Todo {
   id: string;
   title: string;
   completed: boolean;
+  dragDirection: 'bottom' | 'top' | null;
+  swapCount: number;
 }
 
 export interface InputBar {
@@ -44,7 +46,9 @@ export const todoListSlice = createSlice({
       const todo: Todo = {
         id: uuidv4(),
         title: state.inputBar.text,
-        completed: state.inputBar.checked
+        completed: state.inputBar.checked,
+        dragDirection: null,
+        swapCount: 0,
       }
       state.todos.push(todo);
       state.inputBar.text = '';
@@ -63,22 +67,8 @@ export const todoListSlice = createSlice({
     setFilter: (state, action: PayloadAction<Filter>) => {
       state.filter = action.payload;
     },
-    swapTodo: (state, action: PayloadAction<SwapTodo>) => {
-      const { id, direction } = action.payload;
-      const activeTodo = state.todos.find( todo => todo.id === id);
-      const indexTodo = state.todos.findIndex( todo => todo.id === id);
-      console.log(indexTodo, activeTodo);
-      let newTodos = [...state.todos];
-      if ( direction === 'bottom') {
-        newTodos[indexTodo] = state.todos[indexTodo + 1];
-        newTodos[indexTodo + 1] = activeTodo; 
-      } else if (direction === 'top') {
-        newTodos[indexTodo] = state.todos[indexTodo - 1];
-        newTodos[indexTodo - 1] = activeTodo; 
-      }
-      state.todos = newTodos;
-    }
+    
   }
 });
-export const { remove, add, toggleComplete, input, toggleCheckInput, clearCompleted, setFilter, swapTodo } = todoListSlice.actions;
+export const { remove, add, toggleComplete, input, toggleCheckInput, clearCompleted, setFilter } = todoListSlice.actions;
 export default todoListSlice.reducer;
