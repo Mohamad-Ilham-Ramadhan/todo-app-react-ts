@@ -83,9 +83,9 @@ export const todoListSlice = createSlice({
     },
     animateTodo: ( state, action: PayloadAction<{index: number, y: number}>) => {
       const { index, y } = action.payload;
+      console.log('index:', index);
       const todo = state.todos[index];
       state.todos = state.todos.map( t => t.id === todo.id ? {...todo, translateY: y} : t);
-      console.log('state todos animate',state.todos);
     },
     commitSwapTodo: (state, action: PayloadAction<Todo['id']>) => {
       const droppedTodo = state.todos.find( todo => todo.id === action.payload);
@@ -102,9 +102,6 @@ export const todoListSlice = createSlice({
         newTodos = state.todos.slice();
         newTodos.splice(droppedTodoIndex, 1);
         newTodos.splice(droppedTodoIndex + swapCount, 0, {...droppedTodo, swapCount: 0});
-        // newTodos = state.todos.slice(0, droppedTodoIndex + swapCount);
-        // newTodos.push({...droppedTodo, swapCount: 0 });
-        // newTodos = newTodos.concat(state.todos.slice(droppedTodoIndex + swapCount, droppedTodoIndex), state.todos.slice(droppedTodoIndex + 1));
       } else if (swapCount === 0) {
         return;
       }

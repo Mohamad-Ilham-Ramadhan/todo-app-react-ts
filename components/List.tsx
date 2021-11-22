@@ -40,6 +40,7 @@ export default function List({children, id, completed, index, swapCount, transla
 
   function onStart() {
     nodeRef.current.style.zIndex = '1000';
+    nodeRef.current.classList.add('shadow-lg');
   }
   function onDrag(e, data) {
     const halfHeight =  height / 2;
@@ -72,7 +73,7 @@ export default function List({children, id, completed, index, swapCount, transla
     if ( direction !== undefined ) {
       if (direction === 'bottom' && data.y > swapThreshold) {
         if (swapCount < 0) {
-          const swapListIndex = swapCount;
+          const swapListIndex = index + swapCount;
           dispatch(animateTodo({index: swapListIndex, y: 0}));
           dispatch(setSwapCount({id, direction}));
         } else {
@@ -82,7 +83,7 @@ export default function List({children, id, completed, index, swapCount, transla
         }
       } else if (direction === 'top' && data.y < swapThreshold) {
         if (swapCount > 0) {
-          const swapListIndex = swapCount;
+          const swapListIndex = index + swapCount;
           dispatch(animateTodo({index: swapListIndex, y: 0}));
           dispatch(setSwapCount({id, direction}));
         } else {
