@@ -26,7 +26,7 @@ export default function TodoList({className} : Props) {
   } else if ( filter === 'completed' ) {
     filteredTodos = todos.filter( todo => todo.completed );
   }
-
+  console.log('todos: ', filteredTodos);
   function handleFilter(filter: Filter) {
     dispatch(setFilter(filter));
   }

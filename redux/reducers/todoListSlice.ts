@@ -5,8 +5,8 @@ export interface Todo {
   id: string;
   title: string;
   completed: boolean;
-  dragDirection: 'bottom' | 'top' | null;
   swapCount: number;
+  translateY: number;
 }
 
 export interface InputBar {
@@ -47,8 +47,8 @@ export const todoListSlice = createSlice({
         id: uuidv4(),
         title: state.inputBar.text,
         completed: state.inputBar.checked,
-        dragDirection: null,
         swapCount: 0,
+        translateY: 0,
       }
       state.todos.push(todo);
       state.inputBar.text = '';
@@ -67,8 +67,36 @@ export const todoListSlice = createSlice({
     setFilter: (state, action: PayloadAction<Filter>) => {
       state.filter = action.payload;
     },
+    setSwapCount: ( state, action: PayloadAction<{id: Todo['id'], direction: 'bottom' | 'top'}>) => {
+      const { id, direction } = action.payload;
+      state.todos = state.todos.map( todo => {
+        if (todo.id === id) {
+          if ( direction === 'bottom') {
+            return { ...todo, swapCount: todo.swapCount + 1};
+          } else if ( direction === 'top') {
+            return { ...todo, swapCount: todo.swapCount - 1};
+          }
+        } else {
+          return todo;
+        }
+      });
+    },
+    animateTodo: ( state, action: PayloadAction<{index: number, y: number}>) => {
+      const { index, y } = action.payload;
+      const todo = state.todos[index];
+      state.todos = state.todos.map( t => t.id === todo.id ? {...todo, translateY: y} : t);
+      console.log('state todos animate',state.todos);
+    },
+    commitSwapTodo: (state, action: PayloadAction<Todo['id']>) => {
+      const droppedTodo = state.todos.find( todo => todo.id === action.payload);
+      const droppedTodoIndex = state.todos.findIndex( todo => todo.id === action.payload);
+      let newTodos = state.todos.slice(droppedTodoIndex + 1, droppedTodo.swapCount + 1);
+      newTodos.push({...droppedTodo, swapCount: 0 });
+      newTodos = newTodos.concat(state.todos.slice(droppedTodo.swapCount + 1));
+      state.todos = newTodos.map( t => ({...t, translateY: 0}));
+    },
     
   }
 });
-export const { remove, add, toggleComplete, input, toggleCheckInput, clearCompleted, setFilter } = todoListSlice.actions;
+export const { remove, add, toggleComplete, input, toggleCheckInput, clearCompleted, setFilter, setSwapCount, animateTodo, commitSwapTodo } = todoListSlice.actions;
 export default todoListSlice.reducer;
