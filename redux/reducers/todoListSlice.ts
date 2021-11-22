@@ -90,9 +90,24 @@ export const todoListSlice = createSlice({
     commitSwapTodo: (state, action: PayloadAction<Todo['id']>) => {
       const droppedTodo = state.todos.find( todo => todo.id === action.payload);
       const droppedTodoIndex = state.todos.findIndex( todo => todo.id === action.payload);
-      let newTodos = state.todos.slice(droppedTodoIndex + 1, droppedTodo.swapCount + 1);
-      newTodos.push({...droppedTodo, swapCount: 0 });
-      newTodos = newTodos.concat(state.todos.slice(droppedTodo.swapCount + 1));
+      const swapCount = droppedTodo.swapCount;
+      console.log('index:', droppedTodoIndex, 'swapCount:', droppedTodo.swapCount);
+      let newTodos : Todo[];
+      if (swapCount > 0) {
+        newTodos = state.todos.slice();
+        newTodos.splice(droppedTodoIndex, 1);
+        newTodos.splice(droppedTodoIndex + swapCount, 0, {...droppedTodo, swapCount: 0});
+        console.log('newTodos: ', newTodos);
+      } else if (swapCount < 0) {
+        newTodos = state.todos.slice();
+        newTodos.splice(droppedTodoIndex, 1);
+        newTodos.splice(droppedTodoIndex + swapCount, 0, {...droppedTodo, swapCount: 0});
+        // newTodos = state.todos.slice(0, droppedTodoIndex + swapCount);
+        // newTodos.push({...droppedTodo, swapCount: 0 });
+        // newTodos = newTodos.concat(state.todos.slice(droppedTodoIndex + swapCount, droppedTodoIndex), state.todos.slice(droppedTodoIndex + 1));
+      } else if (swapCount === 0) {
+        return;
+      }
       state.todos = newTodos.map( t => ({...t, translateY: 0}));
     },
     

@@ -33,7 +33,7 @@ export default function TodoList({className} : Props) {
 
   return (
     <div className={clsx("dark:bg-dark-theme-very-dark-desaturated-blue bg-white rounded-md shadow-2xl", className)}>
-      <ul className="list-container">
+      <ul className="list-container overflow-hidden rounded-sm">
         {filteredTodos.map( (todo, index) => (
           <List key={todo.id}  index={index} {...todo}>{todo.title}</List>
         ))}

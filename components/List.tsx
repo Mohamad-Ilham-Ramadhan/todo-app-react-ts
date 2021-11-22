@@ -28,7 +28,6 @@ export default function List({children, id, completed, index, swapCount, transla
     setHeight(nodeRef.current.offsetHeight);
   }, [])
   useEffect(() => {
-    console.log('translateY update here:', children, translateY);
     nodeRef.current.style.transform = `translate(0px, ${translateY}px)`;
   }, [translateY])
 
@@ -40,27 +39,16 @@ export default function List({children, id, completed, index, swapCount, transla
   }
 
   function onStart() {
-    // console.log(clientY);
     nodeRef.current.style.zIndex = '1000';
-    // nodeRef.current.style.transform = 'scale(1.2)';
-    // // const jarakKeLayarAtas = nodeRef.current.
-    // const y = nodeRef.current.getBoundingClientRect().y;
-    // setClientY(y);
-    // console.log('on start Y:', y);
   }
-  console.log('swapCount:', swapCount);
   function onDrag(e, data) {
-    const lists = document.querySelectorAll('.todo-list');
     const halfHeight =  height / 2;
     let direction: 'bottom' | 'top' ;
-    console.log(data.lastY, data.y);
     if ( data.y >  data.lastY) {
       direction = 'bottom';
     } else if ( data.y < data.lastY) {
       direction = 'top';
     }
-    // [-409.5, -346.5, -283.5, -220.5, -157.5, -94.5, -31.5, || 31.5, 94.5, 157.5, 220.5, 283.5, 346.5, 409.5]
-    // const swapThreshold = Math.abs(swapCount) * height + halfHeight;
     let swapThreshold: number;
     if (swapCount === 0) {
       if ( direction === 'bottom' ) {
@@ -81,34 +69,24 @@ export default function List({children, id, completed, index, swapCount, transla
         swapThreshold = (swapCount + 1) * height - halfHeight;
       }
     }
-    console.log(direction, 'swapThreshold:', swapThreshold, 'data.y:', data.y);
     if ( direction !== undefined ) {
-      // swap list (transform) dan add swap count
       if (direction === 'bottom' && data.y > swapThreshold) {
         if (swapCount < 0) {
           const swapListIndex = swapCount;
-          const swapList = lists[swapListIndex] as HTMLElement;
-          // swapList.style.transform = `translate(0px, 0px)`;
           dispatch(animateTodo({index: swapListIndex, y: 0}));
           dispatch(setSwapCount({id, direction}));
         } else {
           const swapListIndex = index + swapCount + 1;
-          const swapList = lists[swapListIndex] as HTMLElement;
-          // swapList.style.transform = `translate(0px, ${-height}px)`;
           dispatch(animateTodo({index: swapListIndex, y: -height}));
           dispatch(setSwapCount({id, direction}));
         }
       } else if (direction === 'top' && data.y < swapThreshold) {
         if (swapCount > 0) {
           const swapListIndex = swapCount;
-          const swapList = lists[swapListIndex] as HTMLElement;
-          // swapList.style.transform = `translate(0px, 0px)`;
           dispatch(animateTodo({index: swapListIndex, y: 0}));
           dispatch(setSwapCount({id, direction}));
         } else {
           const swapListIndex = index + swapCount - 1;
-          const swapList = lists[swapListIndex] as HTMLElement;
-          // swapList.style.transform = `translate(0px, ${height}px)`;
           dispatch(animateTodo({index: swapListIndex, y: height}));
           dispatch(setSwapCount({id, direction}));
         }
@@ -135,7 +113,7 @@ export default function List({children, id, completed, index, swapCount, transla
       cancel=".no-handle"
     >
       <li 
-        className="todo-list group relative flex py-3.5 px-5 sm:py-4 sm:px-6 rounded-md dark:text-dark-theme-light-grayish-blue text-light-theme-very-dark-grayish-blue border-b last:border-b-0 dark:border-dark-theme-darkest-grayish-blue border-light-theme-very-light-grayish-blue bg-inherit cursor-move handle"
+        className="todo-list group relative flex py-3.5 px-5 sm:py-4 sm:px-6 dark:text-dark-theme-light-grayish-blue text-light-theme-very-dark-grayish-blue border-b dark:border-dark-theme-darkest-grayish-blue border-light-theme-very-light-grayish-blue cursor-move handle bg-white dark:bg-dark-theme-very-dark-desaturated-blue rounded-t-md"
         ref={nodeRef}
         id={`list-${id}`}
       >
