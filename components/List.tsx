@@ -77,24 +77,24 @@ export default function List({children, id, completed, index, swapCount, transla
         if (swapCount < 0) {
           const swapListIndex = index + swapCount;
           const swapId = lists[swapListIndex].id.replace('list-', '');
-          dispatch(animateTodo({index: swapListIndex, y: 0, id: swapId}));
+          dispatch(animateTodo({y: 0, id: swapId}));
           dispatch(setSwapCount({id, direction}));
         } else {
           const swapListIndex = index + swapCount + 1;
           const swapId = lists[swapListIndex].id.replace('list-', '');
-          dispatch(animateTodo({index: swapListIndex, y: -height, id: swapId}));
+          dispatch(animateTodo({y: -height, id: swapId}));
           dispatch(setSwapCount({id, direction}));
         }
       } else if (direction === 'top' && data.y < swapThreshold) {
         if (swapCount > 0) {
           const swapListIndex = index + swapCount;
           const swapId = lists[swapListIndex].id.replace('list-', '');
-          dispatch(animateTodo({index: swapListIndex, y: 0, id: swapId}));
+          dispatch(animateTodo({y: 0, id: swapId}));
           dispatch(setSwapCount({id, direction}));
         } else {
           const swapListIndex = index + swapCount - 1;
           const swapId = lists[swapListIndex].id.replace('list-', '');
-          dispatch(animateTodo({index: swapListIndex, y: height, id: swapId}));
+          dispatch(animateTodo({y: height, id: swapId}));
           dispatch(setSwapCount({id, direction}));
         }
       }

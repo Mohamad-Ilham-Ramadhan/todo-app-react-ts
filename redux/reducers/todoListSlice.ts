@@ -87,24 +87,47 @@ export const todoListSlice = createSlice({
       state.todos = state.todos.map( t => t.id === id ? {...todo, translateY: y} : t);
     },
     commitSwapTodo: (state, action: PayloadAction<Todo['id']>) => {
+      const filter = state.filter;
       const droppedTodo = state.todos.find( todo => todo.id === action.payload);
       const droppedTodoIndex = state.todos.findIndex( todo => todo.id === action.payload);
       const swapCount = droppedTodo.swapCount;
-      console.log('index:', droppedTodoIndex, 'swapCount:', droppedTodo.swapCount);
-      let newTodos : Todo[];
-      if (swapCount > 0) {
-        newTodos = state.todos.slice();
-        newTodos.splice(droppedTodoIndex, 1);
-        newTodos.splice(droppedTodoIndex + swapCount, 0, {...droppedTodo, swapCount: 0});
-        console.log('newTodos: ', newTodos);
-      } else if (swapCount < 0) {
-        newTodos = state.todos.slice();
-        newTodos.splice(droppedTodoIndex, 1);
-        newTodos.splice(droppedTodoIndex + swapCount, 0, {...droppedTodo, swapCount: 0});
-      } else if (swapCount === 0) {
-        return;
+      console.log('filter:', filter, 'droppedTodo:', droppedTodo, 'droppedTodoIndex:', droppedTodoIndex, 'swapCount:', swapCount);
+      if (filter === 'all') {
+        let newTodos : Todo[] = state.todos.slice();
+        if (swapCount === 0) {
+          return; 
+        } else  {
+          newTodos.splice(droppedTodoIndex, 1);
+          newTodos.splice(droppedTodoIndex + swapCount, 0, {...droppedTodo, swapCount: 0});
+        } 
+        state.todos = newTodos.map( t => ({...t, translateY: 0}));
+      } else if (filter === 'active'){
+
+      } else if (filter === 'completed') {
+        let newTodos = state.todos.slice();
+        let filteredTodos : Todo[] = state.todos.filter( t => t.completed);
+        const droppedTodoIndex = filteredTodos.findIndex(t => t.id === action.payload);
+        const filteredIndexes = state.todos.reduce((pv, cv, index) => {
+          console.log(pv);
+          const filteredIds = filteredTodos.map(t => t.id);
+          if ( filteredIds.includes(cv.id) ) {
+              pv.push(index);
+          }
+          return pv;
+        }, []);
+        if (swapCount === 0) {
+          return;
+        } else  {
+          filteredTodos.splice(droppedTodoIndex, 1);
+          filteredTodos.splice(droppedTodoIndex + swapCount, 0, {...droppedTodo, swapCount: 0});
+          filteredIndexes.reduce( (counter, i) => {
+            console.log(i);
+            newTodos.splice(i, 1, filteredTodos[counter]);
+            return counter + 1;
+          }, 0);
+        } 
+        state.todos = newTodos.map( t => ({...t, translateY: 0}));
       }
-      state.todos = newTodos.map( t => ({...t, translateY: 0}));
     },
     
   }
