@@ -41,8 +41,14 @@ export default function List({children, id, completed, index, swapCount, transla
   function onStart() {
     nodeRef.current.style.zIndex = '1000';
     nodeRef.current.classList.add('shadow-lg');
+    const lists = document.querySelectorAll('.todo-list');
+    lists.forEach( list => {
+      list.classList.add('transition-transform');
+    });
   }
   function onDrag(e, data) {
+    nodeRef.current.classList.add('shadow-lg');
+    nodeRef.current.classList.remove('transition-transform');
     const lists = document.querySelectorAll('.todo-list');
     const halfHeight =  height / 2;
     let direction: 'bottom' | 'top' 
@@ -102,6 +108,10 @@ export default function List({children, id, completed, index, swapCount, transla
   }
   function onStop(e, data) {
     nodeRef.current.style.zIndex = '';
+    const lists = document.querySelectorAll('.todo-list');
+    lists.forEach( list => {
+      list.classList.remove('transition-transform');
+    });
     dispatch(commitSwapTodo(id));
   }
 
