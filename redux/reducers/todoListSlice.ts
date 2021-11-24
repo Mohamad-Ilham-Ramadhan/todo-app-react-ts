@@ -101,11 +101,14 @@ export const todoListSlice = createSlice({
           newTodos.splice(droppedTodoIndex + swapCount, 0, {...droppedTodo, swapCount: 0});
         } 
         state.todos = newTodos.map( t => ({...t, translateY: 0}));
-      } else if (filter === 'active'){
-
-      } else if (filter === 'completed') {
+      } else {
         let newTodos = state.todos.slice();
-        let filteredTodos : Todo[] = state.todos.filter( t => t.completed);
+        let filteredTodos : Todo[];
+        if (filter === 'completed') {
+          filteredTodos = state.todos.filter( t => t.completed);
+        } else if (filter === 'active') {
+          filteredTodos = state.todos.filter( t => !t.completed);
+        }
         const droppedTodoIndex = filteredTodos.findIndex(t => t.id === action.payload);
         const filteredIndexes = state.todos.reduce((pv, cv, index) => {
           console.log(pv);
