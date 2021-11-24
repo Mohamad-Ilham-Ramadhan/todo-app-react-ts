@@ -43,8 +43,9 @@ export default function List({children, id, completed, index, swapCount, transla
     nodeRef.current.classList.add('shadow-lg');
   }
   function onDrag(e, data) {
+    const lists = document.querySelectorAll('.todo-list');
     const halfHeight =  height / 2;
-    let direction: 'bottom' | 'top' ;
+    let direction: 'bottom' | 'top' 
     if ( data.y >  data.lastY) {
       direction = 'bottom';
     } else if ( data.y < data.lastY) {
@@ -70,25 +71,30 @@ export default function List({children, id, completed, index, swapCount, transla
         swapThreshold = (swapCount + 1) * height - halfHeight;
       }
     }
+    console.log('dragged index', index);
     if ( direction !== undefined ) {
       if (direction === 'bottom' && data.y > swapThreshold) {
         if (swapCount < 0) {
           const swapListIndex = index + swapCount;
-          dispatch(animateTodo({index: swapListIndex, y: 0}));
+          const swapId = lists[swapListIndex].id.replace('list-', '');
+          dispatch(animateTodo({index: swapListIndex, y: 0, id: swapId}));
           dispatch(setSwapCount({id, direction}));
         } else {
           const swapListIndex = index + swapCount + 1;
-          dispatch(animateTodo({index: swapListIndex, y: -height}));
+          const swapId = lists[swapListIndex].id.replace('list-', '');
+          dispatch(animateTodo({index: swapListIndex, y: -height, id: swapId}));
           dispatch(setSwapCount({id, direction}));
         }
       } else if (direction === 'top' && data.y < swapThreshold) {
         if (swapCount > 0) {
           const swapListIndex = index + swapCount;
-          dispatch(animateTodo({index: swapListIndex, y: 0}));
+          const swapId = lists[swapListIndex].id.replace('list-', '');
+          dispatch(animateTodo({index: swapListIndex, y: 0, id: swapId}));
           dispatch(setSwapCount({id, direction}));
         } else {
           const swapListIndex = index + swapCount - 1;
-          dispatch(animateTodo({index: swapListIndex, y: height}));
+          const swapId = lists[swapListIndex].id.replace('list-', '');
+          dispatch(animateTodo({index: swapListIndex, y: height, id: swapId}));
           dispatch(setSwapCount({id, direction}));
         }
       }

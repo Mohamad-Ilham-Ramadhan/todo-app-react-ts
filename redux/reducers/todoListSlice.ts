@@ -81,11 +81,10 @@ export const todoListSlice = createSlice({
         }
       });
     },
-    animateTodo: ( state, action: PayloadAction<{index: number, y: number}>) => {
-      const { index, y } = action.payload;
-      console.log('index:', index);
-      const todo = state.todos[index];
-      state.todos = state.todos.map( t => t.id === todo.id ? {...todo, translateY: y} : t);
+    animateTodo: ( state, action: PayloadAction<{id: string, y: number}>) => {
+      const { y, id } = action.payload;
+      const todo = state.todos.find( todo => todo.id === id);
+      state.todos = state.todos.map( t => t.id === id ? {...todo, translateY: y} : t);
     },
     commitSwapTodo: (state, action: PayloadAction<Todo['id']>) => {
       const droppedTodo = state.todos.find( todo => todo.id === action.payload);
