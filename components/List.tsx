@@ -6,6 +6,7 @@ import { remove, toggleComplete, setSwapCount, commitSwapTodo, Todo, animateTodo
 import Draggable from 'react-draggable';
 import { current } from 'immer';
 import { getDisplayName } from 'next/dist/shared/lib/utils';
+import next from 'next';
 
 type Props = {
   children: string;
@@ -21,12 +22,9 @@ export default function List({children, id, completed, index, swapCount, transla
   const nodeRef = useRef(null);
   const [y, setY] = useState(0);
   const [x, setX] = useState(0);
-  const [height, setHeight] = useState(0);
+  const [swapThresholds, setSwapThresholds] = useState([]);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {;
-    setHeight(nodeRef.current.offsetHeight);
-  }, [])
   useEffect(() => {
     nodeRef.current.style.transform = `translate(0px, ${translateY}px)`;
   }, [translateY])
@@ -37,75 +35,120 @@ export default function List({children, id, completed, index, swapCount, transla
   function handleToggleComplete(id) {
     dispatch(toggleComplete(id));
   }
-
+  // index = 0; thresholds = [null, 32, 150, 268, 332];
   function onStart() {
     nodeRef.current.style.zIndex = '1000';
-    nodeRef.current.classList.add('shadow-lg');
     const lists = document.querySelectorAll('.todo-list');
+    let swapThresholds = [];
     lists.forEach( list => {
       list.classList.add('transition-transform');
+      swapThresholds.push()
     });
+    swapThresholds = Array.from(lists).map( (list, i) => {
+      if ( i === index) {
+        return null;
+      } else if ( i < index) {
+        let value = Array.from(lists).slice(i, index).reduce((prev, li, idx, subLists) => {
+          if ( idx === 0) {
+            return prev + (li as HTMLElement).offsetHeight / 2;
+          } else {
+            return prev + (li as HTMLElement).offsetHeight;
+          }
+        }, 0);
+        return -(value);
+      } else if ( i > index) {
+        const subLists = Array.from(lists).slice(index + 1, i + 1);
+        let value = subLists.reduce((prev, li, idx) => {
+          if ( idx + 1 === subLists.length) {
+            return prev + (li as HTMLElement).offsetHeight / 2;
+          } else {
+            return prev + (li as HTMLElement).offsetHeight;
+          }
+        }, 0);
+        return value;
+      }
+    })
+    setSwapThresholds( swapThresholds );
   }
+  
   function onDrag(e, data) {
     nodeRef.current.classList.add('shadow-lg');
-    nodeRef.current.classList.remove('transition-transform');
     const lists = document.querySelectorAll('.todo-list');
-    const halfHeight =  height / 2;
-    let direction: 'bottom' | 'top' 
+    const listHeight = nodeRef.current.offsetHeight;
+    let direction: 'bottom' | 'top';
     if ( data.y >  data.lastY) {
       direction = 'bottom';
     } else if ( data.y < data.lastY) {
       direction = 'top';
     }
-    let swapThreshold: number;
-    if (swapCount === 0) {
-      if ( direction === 'bottom' ) {
-        swapThreshold = swapCount * height + halfHeight;
-      } else if (direction === 'top') {
-        swapThreshold = swapCount * height - halfHeight;
-      }
-    } else if (swapCount > 0) {
-      if ( direction === 'bottom' ) {
-        swapThreshold = swapCount * height + halfHeight;
-      } else if (direction === 'top') {
-        swapThreshold = (swapCount - 1) * height + halfHeight;
-      }
-    } else if (swapCount < 0) {
-      if ( direction === 'top' ) {
-        swapThreshold = swapCount * height - halfHeight;
-      } else if (direction === 'bottom') {
-        swapThreshold = (swapCount + 1) * height - halfHeight;
-      }
+    if (direction === undefined) {
+      return;
     }
-    console.log('dragged index', index);
-    if ( direction !== undefined ) {
-      if (direction === 'bottom' && data.y > swapThreshold) {
-        if (swapCount < 0) {
-          const swapListIndex = index + swapCount;
-          const swapId = lists[swapListIndex].id.replace('list-', '');
-          dispatch(animateTodo({y: 0, id: swapId}));
-          dispatch(setSwapCount({id, direction}));
-        } else {
-          const swapListIndex = index + swapCount + 1;
-          const swapId = lists[swapListIndex].id.replace('list-', '');
-          dispatch(animateTodo({y: -height, id: swapId}));
+    
+    if ( swapCount === 0) {
+      if (direction === 'bottom') {
+        const swapIndex = index + 1;
+        const swapThreshold = swapThresholds[swapIndex];
+        if (data.y > swapThreshold) {
+          const translateY = -(listHeight);
+          const swapId = (lists[swapIndex] as HTMLElement).id.replace('list-', '');
+          dispatch(animateTodo({id: swapId, y: translateY}));
           dispatch(setSwapCount({id, direction}));
         }
-      } else if (direction === 'top' && data.y < swapThreshold) {
-        if (swapCount > 0) {
-          const swapListIndex = index + swapCount;
-          const swapId = lists[swapListIndex].id.replace('list-', '');
-          dispatch(animateTodo({y: 0, id: swapId}));
+      } else if ( direction === 'top') {
+        const swapIndex = index - 1;
+        const swapThreshold = swapThresholds[swapIndex];
+        if (data.y < swapThreshold) {
+          const translateY = listHeight;
+          const swapId = (lists[swapIndex] as HTMLElement).id.replace('list-', '');
+          dispatch(animateTodo({id: swapId, y: translateY}));
           dispatch(setSwapCount({id, direction}));
-        } else {
-          const swapListIndex = index + swapCount - 1;
-          const swapId = lists[swapListIndex].id.replace('list-', '');
-          dispatch(animateTodo({y: height, id: swapId}));
+        }
+      }
+    } else if ( swapCount < 0) {
+      if (direction === 'bottom') {
+        const swapIndex = index + swapCount;
+        const swapThreshold = swapThresholds[swapIndex];
+        if (data.y > swapThreshold) {
+          const translateY = 0;
+          const swapId = (lists[swapIndex] as HTMLElement).id.replace('list-', '');
+          dispatch(animateTodo({id: swapId, y: translateY}));
+          dispatch(setSwapCount({id, direction}));
+        }
+      } else if (direction === 'top') {
+        const swapIndex = index + swapCount - 1;
+        const swapThreshold = swapThresholds[swapIndex];
+        if (data.y < swapThreshold) {
+          const translateY = listHeight;
+          const swapId = (lists[swapIndex] as HTMLElement).id.replace('list-', '');
+          dispatch(animateTodo({id: swapId, y: translateY}));
+          dispatch(setSwapCount({id, direction}));
+        }
+      }
+
+    } else if ( swapCount > 0) {
+      if (direction === 'bottom') {
+        const swapIndex = index + swapCount + 1;
+        const swapThreshold = swapThresholds[swapIndex];
+        if (data.y > swapThreshold) {
+          const translateY = -(listHeight);
+          const swapId = (lists[swapIndex] as HTMLElement).id.replace('list-', '');
+          dispatch(animateTodo({id: swapId, y: translateY}));
+          dispatch(setSwapCount({id, direction}));
+        }
+      } else if (direction === 'top') {
+        const swapIndex = index + swapCount;
+        const swapThreshold = swapThresholds[swapIndex];
+        if (data.y < swapThreshold) {
+          const translateY = 0;
+          const swapId = (lists[swapIndex] as HTMLElement).id.replace('list-', '');
+          dispatch(animateTodo({id: swapId, y: translateY}));
           dispatch(setSwapCount({id, direction}));
         }
       }
     }
   }
+  
   function onStop(e, data) {
     nodeRef.current.style.zIndex = '';
     const lists = document.querySelectorAll('.todo-list');
