@@ -1,9 +1,11 @@
 import {useEffect} from 'react';
 // Components
+import Head from 'next/head';
 import InputBar from '../components/InputBar';
 import TodoList from '../components/TodoList';
 import SwitchTheme from '../components/SwitchTheme';
 import FiltersBar from '../components/FiltersBar';
+// redux
 import { Provider } from 'react-redux';
 import { store } from '../redux/store';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
@@ -28,6 +30,11 @@ export default function Home() {
   }, [todos])
 
   return (
+    <>
+    <Head>
+      <html lang="en"></html>
+      <title>Todo App</title>
+    </Head>
     <div className="px-5 sm:pb-8 pb-16 dark:bg-mobile-dark sm:dark:bg-desktop-dark bg-mobile-light sm:bg-desktop-light bg-no-repeat bg-contain dark:bg-dark-theme-very-dark-blue bg-light-theme-very-light-gray min-h-screen text-xs sm:text-base"> 
       <div className="pt-10 sm:pt-13 w-full sm:w-124 mx-auto">
         <div className="flex text-white sm:mb-10 mb-7">
@@ -42,6 +49,7 @@ export default function Home() {
         <div className="text-center text-sm dark:text-dark-theme-very-dark-grayish-blue text-light-theme-dark-grayish-blue mt-9 sm:mt-11">Drag and drop to reorder list</div>
       </div>
     </div>
+    </>
   );
 }
 
