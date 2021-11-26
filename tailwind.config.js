@@ -56,7 +56,8 @@ module.exports = {
         '1': '1px'
       },
       boxShadow: {
-        '2xl': '0 25px 50px -12px rgba(77, 80, 102, 0.25)',
+        '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.1)',
+
       },
       letterSpacing: {
         'title-mobile': '.55rem',

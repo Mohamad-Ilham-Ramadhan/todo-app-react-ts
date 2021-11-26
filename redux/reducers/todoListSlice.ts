@@ -36,6 +36,9 @@ export const todoListSlice = createSlice({
   name: 'todoList',
   initialState,
   reducers: {
+    setInitialTodos: (state, action: PayloadAction<Todo[]>) => {
+      state.todos = action.payload;
+    },
     input: (state, action: PayloadAction<string>) => {
       state.inputBar.text = action.payload;
     },
@@ -135,5 +138,5 @@ export const todoListSlice = createSlice({
     
   }
 });
-export const { remove, add, toggleComplete, input, toggleCheckInput, clearCompleted, setFilter, setSwapCount, animateTodo, commitSwapTodo } = todoListSlice.actions;
+export const { remove, add, toggleComplete, input, toggleCheckInput, clearCompleted, setFilter, setSwapCount, animateTodo, commitSwapTodo, setInitialTodos } = todoListSlice.actions;
 export default todoListSlice.reducer;

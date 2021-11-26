@@ -18,7 +18,6 @@ export default function TodoList({className} : Props) {
   const activeTodos = todos.filter( todo => !todo.completed);
   const labelRemaining = activeTodos.length > 0 ? `${activeTodos.length} items left` : 'nothing todo zzz';
   let filteredTodos : Todo[];
-
   if ( filter === 'all') {
     filteredTodos = todos;
   } else if ( filter === 'active' ) {
@@ -26,7 +25,6 @@ export default function TodoList({className} : Props) {
   } else if ( filter === 'completed' ) {
     filteredTodos = todos.filter( todo => todo.completed );
   }
-  console.log('todos: ', filteredTodos);
   function handleFilter(filter: Filter) {
     dispatch(setFilter(filter));
   }
